@@ -22,6 +22,7 @@ export function Header({ isOnline }: { isOnline: boolean }) {
         <div className="flex items-center gap-1.5 text-xs">
           <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
           <span className={isOnline ? 'text-emerald-400' : 'text-red-400'}>{isOnline ? 'LIVE' : 'OFFLINE'}</span>
+          <span className="text-xs text-gray-500">· {new Date().toLocaleTimeString()}</span>
         </div>
       </div>
     </header>
