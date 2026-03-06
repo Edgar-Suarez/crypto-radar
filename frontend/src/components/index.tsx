@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 // ── Header ─────────────────────────────────────────────────
 import { useAlerts }       from '../hooks'
 import { TrendingUp, Bell, RefreshCw, ExternalLink } from 'lucide-react'
@@ -7,14 +6,6 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceL
 import type { MentionItem, AlertItem } from '../types'
 
 export function Header({ isOnline }: { isOnline: boolean }) {
-  const [lastUpdate, setLastUpdate] = useState<string>("")
-
-  useEffect(() => {
-    const update = () => setLastUpdate(new Date().toLocaleTimeString())
-    update()
-    const id = setInterval(update, 5 * 60 * 1000)
-    return () => clearInterval(id)
-  }, [])
   const { unreadCount } = useAlerts()
   return (
     <header className="border-b border-gray-800 bg-gray-950 px-5 py-3 flex items-center justify-between sticky top-0 z-50 backdrop-blur">
@@ -31,9 +22,6 @@ export function Header({ isOnline }: { isOnline: boolean }) {
         <div className="flex items-center gap-1.5 text-xs">
           <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-emerald-400 animate-pulse' : 'bg-red-500'}`} />
           <span className={isOnline ? 'text-emerald-400' : 'text-red-400'}>{isOnline ? 'LIVE' : 'OFFLINE'}</span>
-        {lastUpdate && (
-          <span className="hidden sm:block text-xs text-gray-600">Actualizado: {lastUpdate}</span>
-        )}
         </div>
       </div>
     </header>
